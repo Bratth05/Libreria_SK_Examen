@@ -10,4 +10,13 @@ class Libro {
     required this.genero,
     required this.fechaPublicacion,
   });
+
+  factory Libro.fromJson(Map<String, dynamic> json) {
+    return Libro(
+      titulo: json['titulo'] ?? '',
+      autor: json['autor'] ?? '',
+      genero: json['genero'] ?? '',
+      fechaPublicacion: json['fechaPublicacion'] ?? '',
+    );
+  }
 }

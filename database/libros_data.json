@@ -1,0 +1,21 @@
+[
+    {
+      "titulo": "El Resplandor",
+      "autor": "Stephen King",
+      "genero": "Terror",
+      "fechaPublicacion": "1977-01-28"
+    },
+    {
+      "titulo": "It",
+      "autor": "Stephen King",
+      "genero": "Terror",
+      "fechaPublicacion": "1986-09-15"
+    },
+    {
+      "titulo": "Cementerio de Animales",
+      "autor": "Stephen King",
+      "genero": "Terror",
+      "fechaPublicacion": "1983-11-14"
+    }
+  ]
+  
