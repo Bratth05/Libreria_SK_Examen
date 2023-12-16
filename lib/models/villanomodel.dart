@@ -1,4 +1,3 @@
-// models/villano_model.dart
 class Villano {
   final String nombre;
   final String descripcion;

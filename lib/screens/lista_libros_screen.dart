@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:libreria_sk_examen/services/api_service.dart';
+import 'package:libreria_sk_examen/providers/libros_provider.dart';
+import 'package:libreria_sk_examen/widgets/libro_item.dart';
+import 'package:provider/provider.dart';
 
 class ListaLibrosScreen extends StatefulWidget {
   @override
@@ -7,26 +9,12 @@ class ListaLibrosScreen extends StatefulWidget {
 }
 
 class _ListaLibrosScreenState extends State<ListaLibrosScreen> {
-  ApiService apiService = ApiService();
-  List<Map<String, dynamic>> libros = [];
+  LibrosProvider librosProvider = LibrosProvider();
 
   @override
   void initState() {
     super.initState();
-    cargarLibros();
-  }
-
-  Future<void> cargarLibros() async {
-    try {
-      List<Map<String, dynamic>> librosCargados =
-          await apiService.obtenerLibros();
-      setState(() {
-        libros = librosCargados;
-      });
-    } catch (error) {
-      print('Error al cargar los libros: $error');
-      // Aquí puedes manejar el error, por ejemplo, mostrar un mensaje al usuario.
-    }
+    librosProvider.cargarLibros();
   }
 
   @override
@@ -35,21 +23,20 @@ class _ListaLibrosScreenState extends State<ListaLibrosScreen> {
       appBar: AppBar(
         title: Text('Lista de Libros'),
       ),
-      body: libros.isEmpty
-          ? Center(child: CircularProgressIndicator())
-          : ListView.builder(
-              itemCount: libros.length,
+      body: Consumer<LibrosProvider>(
+        builder: (context, librosProvider, _) {
+          if (librosProvider.libros.isEmpty) {
+            return Center(child: CircularProgressIndicator());
+          } else {
+            return ListView.builder(
+              itemCount: librosProvider.libros.length,
               itemBuilder: (context, index) {
-                Map<String, dynamic> libro = libros[index];
-                // Aquí construyes y devuelves el widget para mostrar cada libro.
-                // Puedes personalizar esto según la estructura de tus datos.
-                return ListTile(
-                  title: Text(libro['titulo']),
-                  subtitle: Text(libro['autor']),
-                  // ... otros detalles del libro
-                );
+                return LibroItem(libro: librosProvider.libros[index]);
               },
-            ),
+            );
+          }
+        },
+      ),
     );
   }
 }

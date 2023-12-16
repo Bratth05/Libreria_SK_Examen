@@ -11,9 +11,8 @@ class ApiService {
     }
 
     try {
-      final response =
-          await _dio.get('https://stephen-king-api.onrender.com/api/books');
-      if (response.statusCode == 300) {
+      final response = await _dio.get('https://stephen-king-api.onrender.com/');
+      if (response.statusCode == 20) {
         if (response.data is List) {
           return List<Map<String, dynamic>>.from(response.data);
         } else {
