@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+/*import 'package:flutter/material.dart';
 import 'package:libreria_sk_examen/models/libro.dart';
 
 class LibroItem extends StatelessWidget {
@@ -18,3 +18,4 @@ class LibroItem extends StatelessWidget {
     );
   }
 }
+*/

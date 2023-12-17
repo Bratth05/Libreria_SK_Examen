@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'screens/lista_libros_screen.dart';
+import 'package:libreria_sk_examen/providers/libros_provider.dart';
+import 'package:libreria_sk_examen/screens/lista_libros_screen.dart';
+import 'package:provider/provider.dart';
 
 void main() {
   runApp(MyApp());
@@ -8,13 +10,24 @@ void main() {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Mi Aplicación de Libros',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-        visualDensity: VisualDensity.adaptivePlatformDensity,
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (context) => BookListProvider()),
+      ],
+      child: MaterialApp(
+        title: 'Stephen King Library',
+        theme: ThemeData(
+          primarySwatch: Colors.teal,
+          visualDensity: VisualDensity.adaptivePlatformDensity,
+        ),
+        home: Scaffold(
+          appBar: AppBar(
+            title: Text('Stephen King Libreria'),
+          ),
+          body:
+              BookListScreen(), // Ensure bookListScreen is embedded within a Material widget
+        ),
       ),
-      home: ListaLibrosScreen(),
     );
   }
 }
